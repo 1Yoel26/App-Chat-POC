@@ -1,0 +1,77 @@
+<mat-toolbar color="primary">
+
+    Bienvenue au Chat du support client
+
+</mat-toolbar>
+
+<br><br>
+
+<form
+    class="container-form"
+    [formGroup]="formulaireChat">
+
+    <mat-radio-group
+        formControlName="auteur">
+
+        <mat-label class="label-expediteur">
+            Expediteur
+        </mat-label>
+
+        <mat-radio-button value="Client">
+            Client
+        </mat-radio-button>
+
+        <mat-radio-button value="Support">
+            Support
+        </mat-radio-button>
+
+    </mat-radio-group>
+
+    <div>
+
+        <mat-form-field>
+
+            <mat-label>
+                Votre message
+            </mat-label>
+
+            <textarea
+                matInput
+                cols="50"
+                rows="3"
+                formControlName="contenuMessage">
+
+            </textarea>
+
+        </mat-form-field>
+
+        <button
+            mat-icon-button
+            type="button"
+            (click)="envoyer()">
+
+            <mat-icon>
+                send
+            </mat-icon>
+
+        </button>
+
+    </div>
+
+</form>
+
+
+<div class="div-chat">
+
+
+    @for (unMessage of listDesMessages; track $index) {
+
+        <app-message-client
+        date="{{unMessage.dateEnvoi}}"
+        [auteur]="unMessage.auteur"
+        [text]="unMessage.contenuMessage">
+        </app-message-client>
+        
+    }
+
+</div>
